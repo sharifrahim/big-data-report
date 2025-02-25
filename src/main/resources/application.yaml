@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: generate-big-data-report
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/report_demo
+    username: your_username
+    password: your_password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: your_username
+    password: your_username
+    reply:
+      timeout: 5000
+    listener:
+      simple:
+        concurrency: 5
+        max-concurrency: 10
+
+  queue:
+    daily-transaction-report: DAILY_TRANSACTION_REPORT.FIFO
+    daily-transaction-report-summary: DAILY_TRANSACTION_REPORT_SUMMARY.FIFO
+
+  batch:
+    jdbc:
+      initialize-schema: always
+
+  sql:
+    init:
+      mode: always
+
+debug: true
+
+logging:
+  level:
+    root: DEBUG
